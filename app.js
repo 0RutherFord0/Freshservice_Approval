@@ -2,7 +2,6 @@ window.onload = function () {
   var adityatawade = document.getElementById("database");
 
   const queryString = window.location.search;
-
   const urlParams = new URLSearchParams(queryString);
 
   const urlTicketId = urlParams.get("ticket");
@@ -12,22 +11,23 @@ window.onload = function () {
   const ticketName = "Ticket ID: " + urlTicketId;
   document.querySelector("#ticket_id").innerHTML = ticketName;
 
-  // adityatawade.onclick = async (e) => {
-  //   let response = await fetch(
-  //     "https://iconnectsolutionspvtltd.freshservice.com/api/v2/tickets",
-  //     {
-  //       method: "GET",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: "Basic " + btoa("06V67kkU0TCe13xxkK:x"),
-  //       },
-  //     }
-  //   );
+  adityatawade.onclick = async (e) => {
+    let response = await fetch(
+      "https://iconnectsolutionspvtltd.freshservice.com/api/v2/tickets/" +
+        urlTicketId,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic " + btoa("06V67kkU0TCe13xxkK:x"),
+        },
+      }
+    );
 
-  //   let text = await response.text(); // read response body as text
-  //   data = JSON.parse(text);
-  //   document.querySelector("#encoded").innerHTML = text;
-  // };
+    let text = await response.text(); // read response body as text
+    data = JSON.parse(text);
+    document.querySelector("#encoded").innerHTML = text;
+  };
 
   formElem.onsubmit = async (e) => {
     e.preventDefault();
@@ -52,8 +52,13 @@ window.onload = function () {
         body: JSON.stringify(data),
       }
     );
-
     let text = await response.text(); // read response body as text
-    document.querySelector("#decoded").innerHTML = text;
+    var jsonPretty = JSON.stringify(JSON.parse(text), null, 2);
+    document.querySelector("#decoded").innerHTML = JSON.stringify(
+      jsonPretty,
+      null,
+      4
+    );
+    console.log(jsonPretty);
   };
 };
