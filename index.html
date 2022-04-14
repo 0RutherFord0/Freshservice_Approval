@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <title>test</title>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+  <body>
+    <!-- <form id="formElem">
+        <input type="text" name="firstname" value="Karam">
+        <input type="text" name="lastname" value="Yousef">
+        <input type="text" name="email" value="demo@demo.com">
+        <input type="text" name="phone" value="9768883184">
+        <input type="text" name="comment" value="hello">
+        
+        
+        <input type="submit">
+    </form> -->
+
+    <div class="container">
+      <h1>Create A Ticket</h1>
+
+      <form id="formElem">
+        <div id="ticket_id" class="form-group">
+          <label for="firstName">Ticket ID</label>
+          <input type="text" id="ticketID" value="" name="ticketID" />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Approved Status</label>
+          <input type="text" id="ApprovalStatus" name="ApprovalStatus" />
+          <!-- <select name="ApprovalStatus" id="ApprovalStatus">
+            <option value="">--Please choose an option--</option>
+            <option value="Approved">Approved</option>
+            <option value="Send for Approval">Send for Approval</option>
+          </select> -->
+        </div>
+
+        <button id="submit-button" type="submit">Submit</button>
+        <!-- <button id="database" type="submit">See Database</button> -->
+      </form>
+    </div>
+
+    <div id="status"></div>
+
+    <div class="container">
+      <div class="form-group">
+        <div id="decoded"></div>
+        <!-- <button id="database">See Database</button> -->
+        <div id="encoded"></div>
+      </div>
+    </div>
+  </body>
+</html>
