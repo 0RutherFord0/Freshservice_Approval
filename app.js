@@ -12,11 +12,27 @@ window.onload = async (e) => {
   const ticketName = "Ticket ID: " + urlTicketId;
   document.querySelector("#ticket_id").innerHTML = ticketName;
 
-  let requester_response = await fetch(
-    // "https://iconnectsolutionspvtltd.freshservice.com/api/v2/assets?filter=" +
-    //   "user_id:" +
-    //   requesterID,
+  //Get Ticket Subject Start
+  let ticket_response = await fetch(
+    "https://iconnectsolutionspvtltd.freshservice.com/api/v2/tickets/" +
+      urlTicketId,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Basic " + btoa("06V67kkU0TCe13xxkK:x"),
+      },
+    }
+  );
 
+  let ticket_text = await ticket_response.text(); // read response body as text
+  data = JSON.parse(ticket_text);
+  document.querySelector("#ticket_subject").innerHTML = data.ticket.subject;
+  //Get Ticket Subject End
+
+  // Get Requester Name & Email Start
+
+  let requester_response = await fetch(
     "https://iconnectsolutionspvtltd.freshservice.com/api/v2/requesters/" +
       requesterID,
     {
@@ -27,36 +43,54 @@ window.onload = async (e) => {
       },
     }
   );
+
   let requester_text = await requester_response.text(); // read response body as text
   data = JSON.parse(requester_text);
-  // console.log(data);
   document.querySelector("#requester_name").innerHTML =
     data.requester.first_name + " " + data.requester.last_name;
   document.querySelector("#requester_email").innerHTML =
     data.requester.primary_email;
+  //Get Requester Name & Email End
 
-  adityatawade.onclick = async (e) => {
-    let response = await fetch(
-      // "https://iconnectsolutionspvtltd.freshservice.com/api/v2/assets?filter=" +
-      //   "user_id:" +
-      //   requesterID,
+  //Get Asset List Start
+  let array_response = await fetch(
+    `https://iconnectsolutionspvtltd.freshservice.com/api/v2/assets?filter="user_id:${requesterID}"`,
 
-      "https://iconnectsolutionspvtltd.freshservice.com/api/v2/requesters/" +
-        requesterID,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Basic " + btoa("06V67kkU0TCe13xxkK:x"),
-        },
-      }
-    );
-    let text = await response.text(); // read response body as text
-    data = JSON.parse(text);
-    console.log(data);
-    document.querySelector("#encoded").innerHTML = text;
-    // document.querySelector("#requester").innerHTML = data.requester.first_name;
-  };
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Basic " + btoa("06V67kkU0TCe13xxkK:x"),
+      },
+    }
+  );
+  let array_text = await array_response.text(); // read response body as text
+  data = JSON.parse(array_text);
+  console.log(data);
+  document.querySelector("#asset_list").innerHTML = data.assets
+    .map((asset) => asset.name)
+    .join(", ");
+  //Get Asset List End
+
+  // adityatawade.onclick = async (e) => {
+  //   let array_response = await fetch(
+  //     `https://iconnectsolutionspvtltd.freshservice.com/api/v2/assets?filter="user_id:${requesterID}"`,
+
+  //     {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: "Basic " + btoa("06V67kkU0TCe13xxkK:x"),
+  //       },
+  //     }
+  //   );
+  //   let array_text = await array_response.text(); // read response body as text
+  //   data = JSON.parse(array_text);
+  //   console.log(data);
+  //   document.querySelector("#encoded").innerHTML = data.assets
+  //     .map((asset) => asset.name)
+  //     .join(", ");
+  // };
 
   formElem.onsubmit = async (e) => {
     e.preventDefault();
