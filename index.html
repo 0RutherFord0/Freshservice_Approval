@@ -10,14 +10,26 @@
     <div class="container">
       <h1>Approval Form</h1>
 
+      <div id="ticket_id" class="form-group">
+        <label for="firstName">Ticket ID</label>
+        <input type="text" id="ticketID" name="ticketID" />
+      </div>
+
       <form id="formElem">
-        <div id="ticket_id" class="form-group">
-          <label for="firstName">Ticket ID</label>
-          <input type="text" id="ticketID" value="" name="ticketID" />
+        <div id="requester" class="form-group">
+          <h4>Requester Name:</h4>
+          <div id="requester_name"></div>
+          <!-- <input type="text" id="ticketID" name="ticketID" /> -->
+        </div>
+
+        <div id="requester" class="form-group">
+          <h4>Requester Email:</h4>
+          <div id="requester_email"></div>
+          <!-- <input type="text" id="ticketID" name="ticketID" /> -->
         </div>
 
         <div class="form-group">
-          <label for="email">Approved Status</label>
+          <h4 for="email">Approved Status</h4>
           <input type="text" id="ApprovalStatus" name="ApprovalStatus" />
           <!-- <select
             name="ApprovalStatus"
@@ -31,8 +43,8 @@
         </div>
 
         <button id="submit-button" type="submit">Submit</button>
-        <button id="database" type="submit">See Database</button>
       </form>
+      <button id="database" type="submit">See Database</button>
     </div>
 
     <div id="status"></div>
@@ -41,6 +53,13 @@
       <h3>Decoded on Submit</h3>
       <div class="form-group">
         <div id="decoded"></div>
+      </div>
+    </div>
+
+    <div class="container-2">
+      <h3>Requester Name</h3>
+      <div class="form-group">
+        <div id="requester"></div>
       </div>
     </div>
 
