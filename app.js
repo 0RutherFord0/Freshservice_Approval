@@ -72,25 +72,25 @@ window.onload = async (e) => {
     .join(", ");
   //Get Asset List End
 
-  // adityatawade.onclick = async (e) => {
-  //   let array_response = await fetch(
-  //     `https://iconnectsolutionspvtltd.freshservice.com/api/v2/assets?filter="user_id:${requesterID}"`,
+  adityatawade.onclick = async (e) => {
+    let array_response = await fetch(
+      `https://iconnectsolutionspvtltd.freshservice.com/api/v2/assets?filter="user_id:${requesterID}"`,
 
-  //     {
-  //       method: "GET",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: "Basic " + btoa("06V67kkU0TCe13xxkK:x"),
-  //       },
-  //     }
-  //   );
-  //   let array_text = await array_response.text(); // read response body as text
-  //   data = JSON.parse(array_text);
-  //   console.log(data);
-  //   document.querySelector("#encoded").innerHTML = data.assets
-  //     .map((asset) => asset.name)
-  //     .join(", ");
-  // };
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Basic " + btoa("06V67kkU0TCe13xxkK:x"),
+        },
+      }
+    );
+    let array_text = await array_response.text(); // read response body as text
+    data = JSON.parse(array_text);
+    console.log(data);
+    document.querySelector("#encoded").innerHTML = data.assets
+      .map((asset) => asset.name)
+      .join(", ");
+  };
 
   formElem.onsubmit = async (e) => {
     e.preventDefault();
